@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Tarea3MAD.Views.RegistryPage"
+             Title="Registry">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <Grid VerticalOptions="CenterAndExpand" Padding="40" 
+                      HorizontalOptions="CenterAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="donut"
+                           Grid.Row="0" Grid.Column="0"/>
+
+                    <Entry Text="{Binding NewUser.Name}" Placeholder="Name"
+                                 Grid.Row="1" Grid.Column="0"
+                           Style="{StaticResource EntryCutieStyle}"/>
+
+                    <Entry Text="{Binding NewUser.Email}" Placeholder="Email"
+                                Keyboard="Email" Grid.Row="2" Grid.Column="0"
+                           Style="{StaticResource EntryCutieStyle}"/>
+
+                    <Entry Text="{Binding NewUser.Password}" Placeholder="Password"
+                              IsPassword="True" Grid.Row="3" Grid.Column="0" />
+
+                    <Entry Text="{Binding NewUser.ConfPassword}" Placeholder="Confirm Password"
+                              IsPassword="True" Grid.Row="4" Grid.Column="0" />
+
+                    <Button Text="Register" Style="{StaticResource ButtonCutie}"
+                            BackgroundColor="#db5bec"
+                            TextColor="White"
+                            Grid.Row="5" Grid.Column="0"
+                            Command="{Binding RegisterCommand}"/>
+
+                    <Label Text="{Binding MessageText, Mode=TwoWay}"
+                            Style="{StaticResource LabelWarning}" 
+                            Grid.Row="6" Grid.Column="0"/>
+
+                </Grid>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage> 

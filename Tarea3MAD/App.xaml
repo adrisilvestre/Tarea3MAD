@@ -7,5 +7,23 @@
              x:Class="Tarea3MAD.App">
     <Application.Resources>
 
+        <ResourceDictionary>
+
+            <Style x:Key="EntryCutieStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="DeepPink"/>
+            </Style>
+
+            <Style x:Key="ButtonCutie" TargetType="Button">
+                <Setter Property="CornerRadius" Value="23"/>
+            </Style>
+
+            <Style x:Key="LabelWarning" TargetType="Label">
+                <Setter Property="TextColor" Value="Red"/>
+                <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </Style>
+
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

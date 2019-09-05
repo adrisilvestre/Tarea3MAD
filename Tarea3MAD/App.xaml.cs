@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Tarea3MAD.Views;
 
 namespace Tarea3MAD
 {
@@ -10,7 +11,7 @@ namespace Tarea3MAD
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

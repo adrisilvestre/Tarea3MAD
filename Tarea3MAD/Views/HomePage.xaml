@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Tarea3MAD.Views.HomePage">
+
+
+    <ContentPage Title="Home" IconImageSource="bakery" 
+                 BackgroundImageSource="SweetBackGround">
+        <StackLayout Padding="20">
+
+            <Grid VerticalOptions="CenterAndExpand" Padding="40" 
+                  HorizontalOptions="CenterAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding WelcomeLabel, Mode=TwoWay}" 
+                       BackgroundColor="#ff8ad2"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="0" Grid.Column="0"/>
+
+            </Grid>
+
+
+        </StackLayout>
+
+    </ContentPage>
+
+
+    <ContentPage Title="Option 1" IconImageSource="honey">
+        <StackLayout Padding="20">
+            <Grid VerticalOptions="CenterAndExpand" Padding="40" 
+                  HorizontalOptions="CenterAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Sweet Cream Option 1!" 
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       BackgroundColor="#ff8ad2"
+                       TextColor="White"
+                       Grid.Row="0" Grid.Column="0"/>
+
+            </Grid>
+
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="Option 2" IconImageSource="pie">
+        <StackLayout Padding="20">
+
+            <Grid VerticalOptions="CenterAndExpand" Padding="40" 
+                  HorizontalOptions="CenterAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Sweet Cake Option 2!" 
+                       TextColor="CornflowerBlue"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="0" Grid.Column="0"/>
+
+            </Grid>
+
+        </StackLayout>
+        
+    </ContentPage>
+</TabbedPage>
