@@ -29,7 +29,7 @@
                            Grid.Row="0" Grid.Column="0"
                            Style="{StaticResource EntryCutieStyle}"/>
 
-                    <Entry Text="{Binding User.PhoneNumber}" Placeholder="Phone Number"
+                    <Entry Text="{Binding Contact.PhoneNumber}" Placeholder="Phone Number"
                              Keyboard="Telephone" Grid.Row="1" Grid.Column="0" />
 
                     <Button Text="Add Contact" Style="{StaticResource ButtonCutie}"

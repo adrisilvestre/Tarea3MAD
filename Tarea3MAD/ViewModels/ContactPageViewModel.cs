@@ -41,8 +41,13 @@ namespace Tarea3MAD.ViewModels
 
             AddContactCommand = new Command<Contact>(async (param) =>
               {
-                  var result = await App.Current.MainPage.DisplayAlert("More", "Cancel", "Destruction", "Borrar");
-                  //await App.Current.MainPage.Navigation.PushAsync(new AddContactPage());
+                  
+                  await App.Current.MainPage.Navigation.PushAsync(new AddContactPage());
+                  MessagingCenter.Subscribe<AddContactPageViewModel, Contact>(this, "ContactInfo", ((sender, contacinfo) =>
+                  {
+                      Contacts.Add(contacinfo);
+                      MessagingCenter.Unsubscribe<AddContactPageViewModel, string>(this, "ContactInfo");
+                  }));
               });
 
             DeleteElementCommand = new Command<Contact>(async (param) =>
@@ -56,10 +61,7 @@ namespace Tarea3MAD.ViewModels
               });
 
 
-            MessagingCenter.Subscribe<App, string>(this, "TESTID", ((sender, param) =>
-            {
-                MessagingCenter.Unsubscribe<App, string>(this, "TESTID");
-            }));
+           
         }
 
         void OnSelectItem(Contact contact)

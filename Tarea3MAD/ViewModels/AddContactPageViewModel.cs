@@ -13,29 +13,37 @@ namespace Tarea3MAD.ViewModels
     public class AddContactPageViewModel:INotifyPropertyChanged
     {
         public string MessageText { get; set; }
-        public Contact contact { get; set; }
+        public Contact Contact { get; set; }
         public ICommand AddCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public AddContactPageViewModel()
         {
-            contact = new Contact();
+            Contact = new Contact();
 
             AddCommand = new Command(async () =>
               {
-                  if (String.IsNullOrEmpty(contact.Name) || String.IsNullOrEmpty(contact.PhoneNumber))
+                  if (String.IsNullOrEmpty(Contact.Name) || String.IsNullOrEmpty(Contact.PhoneNumber))
                   {
 
                       MessageText = "No se admiten campos vacíos.";
-
+                      
                   }
                   else
                   {
                       MessageText = null;
-                     
+                      MessagingCenter.Send<AddContactPageViewModel, Contact>(this, "ContactInfo", Contact);
+                      ClosePage();
                   }
               });
         }
+
+
+        async void ClosePage()
+        {
+            await App.Current.MainPage.Navigation.PopAsync();
+        }
+        
 
     }
 }
