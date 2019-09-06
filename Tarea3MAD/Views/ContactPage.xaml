@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Tarea3MAD.Views.ContactPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="AddItem" Order="Primary"  Text="Add" Priority="0" 
+                     Command="{Binding AddContactCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Contacts}"
+                  x:Name="contlistv"
+                  SelectedItem="{Binding SelectedContact}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell Text="{Binding Name}"
+                               Detail="{Binding PhoneNumber}">
+                        <ImageCell.ContextActions>
+                            <MenuItem Text="More"
+                                      Command="{Binding Path=BindingContext.MoreActionsCommand, Source={x:Reference contlistv}}"/>
+                            <MenuItem Text="Delete"
+                                       Command="{Binding Path=BindingContext.DeleteElementCommand, Source={x:Reference contlistv}}"
+                                       CommandParameter="{Binding .}"
+                                       IsDestructive="True"/>
+                        </ImageCell.ContextActions>
+                    </ImageCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </ContentPage.Content>
+</ContentPage>

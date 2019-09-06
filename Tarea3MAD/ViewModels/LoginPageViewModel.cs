@@ -35,7 +35,11 @@ namespace Tarea3MAD.ViewModels
                     MessageText = "No se admiten campos vacíos.";
 
                 }
-                else { MessageText = null; }
+                else
+                {
+                    MessageText = null;
+                    await App.Current.MainPage.Navigation.PushAsync(new ContactPage());
+                }
 
             });
 

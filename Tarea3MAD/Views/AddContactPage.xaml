@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Tarea3MAD.Views.AddContactPage"
+             Title="New Contact">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <Grid VerticalOptions="StartAndExpand" Padding="40" 
+                      HorizontalOptions="CenterAndExpand">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    
+                    <Entry Text="{Binding Contact.Name}" Placeholder="Name"
+                           Grid.Row="0" Grid.Column="0"
+                           Style="{StaticResource EntryCutieStyle}"/>
+
+                    <Entry Text="{Binding User.PhoneNumber}" Placeholder="Phone Number"
+                             Keyboard="Telephone" Grid.Row="1" Grid.Column="0" />
+
+                    <Button Text="Add Contact" Style="{StaticResource ButtonCutie}"
+                            BackgroundColor="#db5bec"
+                            TextColor="White"
+                            Grid.Row="2" Grid.Column="0"
+                            Command="{Binding AddCommand}"/>
+
+                    <Label Text="{Binding MessageText, Mode=TwoWay}"
+                            Style="{StaticResource LabelWarning}" 
+                            Grid.Row="3" Grid.Column="0"/>
+
+
+                </Grid>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
