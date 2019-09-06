@@ -12,9 +12,9 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Contacts}"
+        <ListView ItemsSource="{Binding ContactsList}"
                   x:Name="contlistv"
-                  SelectedItem="{Binding SelectedContact}">
+                  SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ImageCell Text="{Binding Name}"

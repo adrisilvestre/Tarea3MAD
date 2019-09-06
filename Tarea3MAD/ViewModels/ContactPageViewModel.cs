@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -12,64 +13,79 @@ namespace Tarea3MAD.ViewModels
 {
     public class ContactPageViewModel
     {
-        Contact contact;
-        public Contact SelectedContact
-        {
-            get
-            {
-                return contact;
-            }
-            set
-            {
-                contact = value;
+        public Contact SelectedContact { get; set; }
 
-                if (contact != null) { OnSelectItem(contact); }
-            }
-        }
-
-        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
+        public ObservableCollection<Contact> ContactsList { get; set; } = new ObservableCollection<Contact>();
         public ICommand DeleteElementCommand { get; set; }
         public ICommand MoreActionsCommand { get; set; }
         public ICommand AddContactCommand { get; set; }
         
         public ContactPageViewModel()
         {
-            Contact mycontact = new Contact();
-            mycontact.Name = "Pablo";
-            mycontact.PhoneNumber = "8201598";
-            Contacts.Add(mycontact);
+            new Contact();
 
             AddContactCommand = new Command<Contact>(async (param) =>
               {
-                  
                   await App.Current.MainPage.Navigation.PushAsync(new AddContactPage());
-                  MessagingCenter.Subscribe<AddContactPageViewModel, Contact>(this, "ContactInfo", ((sender, contacinfo) =>
+                  MessagingCenter.Subscribe<AddContactPageViewModel, Contact>(this, "ContactInfo", ((sender, contactinfo) =>
                   {
-                      Contacts.Add(contacinfo);
-                      MessagingCenter.Unsubscribe<AddContactPageViewModel, string>(this, "ContactInfo");
+
+                      MessagingCenter.Unsubscribe<AddContactPageViewModel, Contact>(this, "ContactInfo");
+                      ContactsList.Add(contactinfo);
+                              
+                      
                   }));
+
+                 
               });
 
             DeleteElementCommand = new Command<Contact>(async (param) =>
             {
-                var result = await App.Current.MainPage.DisplayAlert("Menu", "Cancel", "Destruction", "Borrar");
+                this.ContactsList.Remove(SelectedContact);
+                
             });
 
             MoreActionsCommand = new Command<Contact>(async (param) =>
               {
-                  var result = await App.Current.MainPage.DisplayAlert("More", "Cancel", "Destruction", "Borrar");
+                  var result = await App.Current.MainPage.DisplayActionSheet("More", "Cancel", null, "Call","Edit");
+
+                  switch (result)
+                  {
+                      case "Call":
+                          Device.OpenUri(new Uri(String.Format("tel:{0}", SelectedContact.PhoneNumber)));
+                          break;
+                      case "Edit":
+                          EditContact(SelectedContact);
+                          break;
+                      default:
+                          break;
+                  }
               });
 
+            MessagingCenter.Subscribe<EditContactPageViewModel, Contact>(this, "EditionFinished", ((sender, contacinfo) =>
+            {
+                MessagingCenter.Unsubscribe<EditContactPageViewModel, Contact>(this, "EditionFinished");
 
-           
+                SelectedContact.Name = contacinfo.Name;
+                SelectedContact.PhoneNumber = contacinfo.PhoneNumber;
+
+                
+            }));
+
+
         }
 
-        void OnSelectItem(Contact contact)
+        async void CloseEditPage()
         {
-            Contact myContact = new Contact();
-            myContact.Name = "New Name";
-
-            Contacts.Add(myContact);
+            await App.Current.MainPage.Navigation.PopAsync();
         }
+        void EditContact(Contact SelectedContact)
+        {
+            MessagingCenter.Send<ContactPageViewModel, Contact>(this, "EditContact", SelectedContact);
+            App.Current.MainPage.Navigation.PushAsync(new EditContactPage());
+        }
+
+   
+
     }
 }

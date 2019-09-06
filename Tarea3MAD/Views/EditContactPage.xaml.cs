@@ -6,22 +6,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Tarea3MAD.Models;
-using Tarea3MAD.ViewModels;
 
 namespace Tarea3MAD.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ContactPage : ContentPage
+    public partial class EditContactPage : ContentPage
     {
-        public ContactPage()
+        public EditContactPage()
         {
             InitializeComponent();
-            BindingContext = new ContactPageViewModel();
-
-            
         }
-
-        
     }
 }
