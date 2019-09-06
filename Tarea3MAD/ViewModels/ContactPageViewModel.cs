@@ -1,25 +1,28 @@
 ﻿using System;
+
+
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Xamarin.Forms;
+using System.ComponentModel;
 using Tarea3MAD.Models;
 using Tarea3MAD.Views;
+using System.Windows.Input;
+using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 
 namespace Tarea3MAD.ViewModels
 {
-    public class ContactPageViewModel
+    public class ContactPageViewModel:INotifyPropertyChanged
     {
         public Contact SelectedContact { get; set; }
-
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<Contact> ContactsList { get; set; } = new ObservableCollection<Contact>();
         public ICommand DeleteElementCommand { get; set; }
         public ICommand MoreActionsCommand { get; set; }
         public ICommand AddContactCommand { get; set; }
-        
+      
+
         public ContactPageViewModel()
         {
             new Contact();
@@ -55,6 +58,7 @@ namespace Tarea3MAD.ViewModels
                           Device.OpenUri(new Uri(String.Format("tel:{0}", SelectedContact.PhoneNumber)));
                           break;
                       case "Edit":
+
                           EditContact(SelectedContact);
                           break;
                       default:
@@ -66,8 +70,12 @@ namespace Tarea3MAD.ViewModels
             {
                 MessagingCenter.Unsubscribe<EditContactPageViewModel, Contact>(this, "EditionFinished");
 
-                SelectedContact.Name = contacinfo.Name;
-                SelectedContact.PhoneNumber = contacinfo.PhoneNumber;
+                //Solo "edita" el primer elemento.
+                ContactsList.Remove(SelectedContact);
+                ContactsList.Add(contacinfo);
+              //  SelectedContact = contacinfo;
+               // SelectedContact.Name = contacinfo.Name; Aquí como que sucede algo
+                //SelectedContact.PhoneNumber = contacinfo.PhoneNumber;
 
                 
             }));

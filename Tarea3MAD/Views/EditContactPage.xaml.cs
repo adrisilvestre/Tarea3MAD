@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Tarea3MAD.Models;
+using Tarea3MAD.ViewModels;
 
 namespace Tarea3MAD.Views
 {
@@ -15,6 +17,8 @@ namespace Tarea3MAD.Views
         public EditContactPage()
         {
             InitializeComponent();
+
+            BindingContext = new EditContactPageViewModel();
         }
     }
 }

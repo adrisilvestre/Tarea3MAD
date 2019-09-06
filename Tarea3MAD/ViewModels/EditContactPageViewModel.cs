@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+
 using Tarea3MAD.Models;
 using Tarea3MAD.Views;
 using System.Windows.Input;
@@ -14,18 +15,24 @@ namespace Tarea3MAD.ViewModels
     public class EditContactPageViewModel:INotifyPropertyChanged
     {
         public string MessageText { get; set; }
-        public Contact Contact { get; set; }
-        public ICommand EditCommand { get; set; }
+        public Contact Contact1 { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand EditCommand { get; set; }
+        public ICommand EditingCommand { get; set; }
         public EditContactPageViewModel()
         {
-            Contact = new Contact();
+            Contact1 = new Contact();
 
             MessagingCenter.Subscribe<ContactPageViewModel, Contact>(this, "EditContact", ((sender, SelectedContact) =>
             {
                 MessagingCenter.Unsubscribe<ContactPageViewModel, Contact>(this, "EditContact");
-                Contact.Name = SelectedContact.Name;
-                Contact.PhoneNumber = SelectedContact.PhoneNumber;
+                EditingCommand = new Command(async () =>
+                {
+                    
+                    Contact1 = SelectedContact;
+                    
+                });
+                
 
                 
             }));
@@ -34,7 +41,7 @@ namespace Tarea3MAD.ViewModels
               {
                   
 
-                  if (String.IsNullOrEmpty(Contact.Name) || String.IsNullOrEmpty(Contact.PhoneNumber))
+                  if (String.IsNullOrEmpty(Contact1.Name) || String.IsNullOrEmpty(Contact1.PhoneNumber))
                   {
 
                       MessageText = "No se admiten campos vacíos.";
@@ -43,7 +50,7 @@ namespace Tarea3MAD.ViewModels
                   else
                   {
                       MessageText = null;
-                      MessagingCenter.Send<EditContactPageViewModel, Contact>(this, "EditionFinished", Contact);
+                     MessagingCenter.Send<EditContactPageViewModel, Contact>(this, "EditionFinished", Contact1);
 
                       ClosePage();
                   }

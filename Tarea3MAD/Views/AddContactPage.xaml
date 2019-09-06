@@ -27,6 +27,7 @@
                     
                     <Entry Text="{Binding Contact.Name}" Placeholder="Name"
                            Grid.Row="0" Grid.Column="0"
+                           Keyboard="Text"
                            Style="{StaticResource EntryCutieStyle}"/>
 
                     <Entry Text="{Binding Contact.PhoneNumber}" Placeholder="Phone Number"

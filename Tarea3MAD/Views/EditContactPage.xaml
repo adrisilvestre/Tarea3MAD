@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Tarea3MAD.Views.EditContactPage">
+             x:Class="Tarea3MAD.Views.EditContactPage"
+             Title="Edit">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -24,11 +25,11 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Entry Text="{Binding Contact.Name}" Placeholder="Name"
+                    <Entry x:Name="EName"  Text="{Binding Contact1.Name, Mode=TwoWay}" Placeholder="Name"
                            Grid.Row="0" Grid.Column="0"
                            Style="{StaticResource EntryCutieStyle}"/>
 
-                    <Entry Text="{Binding Contact.PhoneNumber}" Placeholder="Phone Number"
+                    <Entry Text="{Binding Contact1.PhoneNumber, Mode=TwoWay}" Placeholder="Phone Number"
                              Keyboard="Telephone" Grid.Row="1" Grid.Column="0" />
 
                     <Button Text="Save" Style="{StaticResource ButtonCutie}"
